@@ -1,5 +1,10 @@
-// Command is just a function.
-// Commands are an object-oriented replacement for callbacks
+/**
+ * Encapsulate a request as an object, thereby letting you parameterize clients
+ * with different requests, queue or log requests, and support undoable
+ * operations.
+ *
+ * In JS world: Command is just an object-oriented replacement for callback
+ */
 
 function execute(command) {
   command();

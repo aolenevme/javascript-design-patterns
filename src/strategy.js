@@ -1,4 +1,10 @@
-// Strategy is just a function passed to another function
+/**
+ * Define a family of algorithms, encapsulate each one, and make them
+ * interchangeable. Strategy lets the algorithm vary independently
+ * from clients that use it.
+ *
+ * In JS world: Strategy is just a function passed to another function
+ */
 
 const collection = [4, 5, 2, 9, 100, 3];
 
