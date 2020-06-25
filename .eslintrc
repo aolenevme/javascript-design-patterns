@@ -1,13 +1,13 @@
 {
   "extends": [
-    "hardcore",
-    "hardcore/fp"
+    "hardcore"
   ],
   "env": {
     "node": true
   },
   "rules": {
     "strict": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "no-magic-numbers": "off"
   }
 }
