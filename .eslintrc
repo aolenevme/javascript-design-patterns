@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "hardcore",
+    "hardcore/fp"
+  ],
+  "env": {
+    "node": true
+  }
+}
