@@ -5,9 +5,47 @@
  *
  * In JS world: If a language support multiple dispatch, you don’t need Visitor
  * pattern. Unfortunately, it is not true for Javascript either. But we can
- * create some sort of multidispatching using:
- * 1. strings instead of Clojure`s keywords (so it leads to elimination of
- * hierarchy at all).
- * 2. table-driven approach instead of switch cases
- * 3. and OCP is also violated. 🙃
+ * create some sort of multiple dispatch. Consider this article for a more
+ * detailed explanation: https://raganwald.com/2014/06/23/multiple-dispatch.html
  */
+
+function defMulti(...methods) {
+  return () => {
+    for (const method of methods) {
+      const value = method();
+
+      if (value !== undefined) {
+        return value;
+      }
+    }
+  };
+}
+
+function defMethod(guard, body) {
+  const [condition, methodArguments] = guard;
+
+  return () => (condition ? body(...methodArguments) : undefined);
+}
+
+function equals(...methodArguments) {
+  const [first, second] = methodArguments;
+
+  return [first === second, methodArguments];
+}
+
+function greaterThan(...methodArguments) {
+  const [first, second] = methodArguments;
+
+  return [first > second, methodArguments];
+}
+
+const equalizer = defMulti(
+  defMethod(equals(1, 1), (first, second) => `${first} is equal to ${second}`),
+  defMethod(
+    greaterThan(1, 2),
+    (first, second) => `${first} is greater than ${second}`
+  ),
+  defMethod([true, []], () => "Default case")
+);
+
+console.log(equalizer());
