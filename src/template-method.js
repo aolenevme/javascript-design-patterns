@@ -5,7 +5,7 @@
  *
  * In JS world: It is just strategy with defaults. We can use multiple
  * dispatching in addition instead of explicit creation of separate functions.
- * Reference visitor file.
+ * Reference visitor for detailed information.
  */
 
 function isUserRegistered(user) {
