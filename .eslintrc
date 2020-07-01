@@ -8,6 +8,7 @@
   "rules": {
     "strict": "off",
     "no-console": "off",
+    "no-use-before-define": "off",
     "no-magic-numbers": "off"
   }
 }
