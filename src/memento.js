@@ -7,7 +7,7 @@
  */
 
 let textbox = {};
-let memento = null;
+let memento;
 
 function initTextbox() {
   textbox = { ...textbox, ...{ text: "", color: "BLACK", width: 100 } };
