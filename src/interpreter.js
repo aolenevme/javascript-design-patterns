@@ -29,7 +29,7 @@ function isArray(...methodArguments) {
 function isObject(...methodArguments) {
   const [tree] = methodArguments;
 
-  return [typeof tree === "object" && !isArray(tree), methodArguments];
+  return [typeof tree === "object" && !isArray(tree)[0], methodArguments];
 }
 
 function interpret(tree) {
@@ -37,24 +37,30 @@ function interpret(tree) {
     defMethod(isNumber(tree), (number) => `i${number}e`),
     defMethod(isString(tree), (string) => `${string.length}:${string}`),
     defMethod(isArray(tree), (array) => {
-      const interpretedItems = array.map((item) => interpret(item));
+      const interpretedItems = array.map((item) => interpret(item)());
 
-      return `l${interpretedItems}e`;
+      const interpretedItemsString = interpretedItems.join("");
+
+      return `l${interpretedItemsString}e`;
     }),
     defMethod(isObject(tree), (object) => {
       const interpretedItems = Object.entries(object).map(
-        ([key, value]) => `${interpret(key)}${interpret(value)}`
+        ([key, value]) => `${interpret(key)()}${interpret(value)()}`
       );
 
-      return `d${interpretedItems}e`;
+      const interpretedItemsString = interpretedItems.join("");
+
+      return `d${interpretedItemsString}e`;
     })
   );
 }
 
-interpret({
+const interpretedTree = interpret({
   user: "Bertie",
   numberOfDownloadedTorrents: 623,
   numberOfUploadedTorrents: 0,
   donationInDollars: 0,
   prefferedCategories: ["porn", "murder", "scala"],
-});
+})();
+
+console.log(interpretedTree);
