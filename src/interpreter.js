@@ -37,7 +37,7 @@ function interpret(tree) {
     defMethod(isNumber(tree), (number) => `i${number}e`),
     defMethod(isString(tree), (string) => `${string.length}:${string}`),
     defMethod(isArray(tree), (array) => {
-      const interpretedItems = array.map((item) => interpret(item)());
+      const interpretedItems = array.map((item) => interpret(item));
 
       const interpretedItemsString = interpretedItems.join("");
 
@@ -45,14 +45,14 @@ function interpret(tree) {
     }),
     defMethod(isObject(tree), (object) => {
       const interpretedItems = Object.entries(object).map(
-        ([key, value]) => `${interpret(key)()}${interpret(value)()}`
+        ([key, value]) => `${interpret(key)}${interpret(value)}`
       );
 
       const interpretedItemsString = interpretedItems.join("");
 
       return `d${interpretedItemsString}e`;
     })
-  );
+  )();
 }
 
 const interpretedTree = interpret({
@@ -61,6 +61,6 @@ const interpretedTree = interpret({
   numberOfUploadedTorrents: 0,
   donationInDollars: 0,
   prefferedCategories: ["porn", "murder", "scala"],
-})();
+});
 
 console.log(interpretedTree);
