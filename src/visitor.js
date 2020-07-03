@@ -4,9 +4,7 @@
  * classes of the elements on which it operates.
  *
  * In JS world: If a language support multiple dispatch, you don’t need Visitor
- * pattern. Unfortunately, it is not true for Javascript either. But we can
- * create some sort of multiple dispatch. Consider this article for a more
- * detailed explanation: https://raganwald.com/2014/06/23/multiple-dispatch.html
+ * pattern.
  */
 
 const { defMulti, defMethod } = require("./common/multiple-dispatch.js");
@@ -23,7 +21,7 @@ function greaterThan(...methodArguments) {
   return [first > second, methodArguments];
 }
 
-const equalizer = defMulti(
+const equalize = defMulti(
   defMethod(equals(1, 1), (first, second) => `${first} is equal to ${second}`),
   defMethod(
     greaterThan(1, 2),
@@ -32,4 +30,4 @@ const equalizer = defMulti(
   defMethod([true, []], () => "Default case")
 );
 
-console.log(equalizer());
+console.log(equalize());
