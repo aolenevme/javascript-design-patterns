@@ -23,7 +23,7 @@ function greaterThan(...methodArguments) {
   return [first > second, methodArguments];
 }
 
-const equalizer = defMulti(
+const equalize = defMulti(
   defMethod(equals(1, 1), (first, second) => `${first} is equal to ${second}`),
   defMethod(
     greaterThan(1, 2),
@@ -32,4 +32,4 @@ const equalizer = defMulti(
   defMethod([true, []], () => "Default case")
 );
 
-console.log(equalizer());
+console.log(equalize());
