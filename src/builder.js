@@ -15,7 +15,7 @@ function areRequiredIngredientsSet({ name, amount, water }) {
 
 function makeCoffee(ingredients) {
   if (!areRequiredIngredientsSet(ingredients)) {
-    throw new Error("Name, amount and amount of water must be set");
+    throw new Error("Name, amount and water must be set");
   }
 
   const {
