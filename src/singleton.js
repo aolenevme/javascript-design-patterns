@@ -5,11 +5,12 @@
  * In JS world: It is just a global variable
  */
 
-// eslint-disable-next-line no-implicit-globals,no-undef
-applicationState = {};
-
-// eslint-disable-next-line max-len,no-warning-comments
-// TODO: Make via Object.defineProperties so that applicationState cannot be reset
+Object.defineProperty(global, "applicationState", {
+  value: {
+    backgroundStyle: "black",
+    fontStyle: "Arial",
+  },
+});
 
 // eslint-disable-next-line no-undef
 console.log(applicationState);
