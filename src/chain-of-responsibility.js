@@ -11,6 +11,8 @@ function chain(message) {
     return profanityFilter(logFilter(rejectFilter(message)));
   } catch (error) {
     console.error(error);
+
+    return undefined;
   }
 }
 
