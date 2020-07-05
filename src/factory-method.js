@@ -9,7 +9,7 @@
 function mazeBuilder(...builderArguments) {
   const [makeFn, ...makeFnArguments] = builderArguments;
 
-  return makeFn(...makeFnArguments);
+  return makeFn(...makeFnArguments, { status: "new" });
 }
 
 function makeWoodenMaze(...makeFnArguments) {
