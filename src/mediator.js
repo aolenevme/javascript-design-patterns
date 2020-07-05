@@ -3,7 +3,7 @@
  * promotes loose coupling by keeping objects from referring to each other
  * explicitly, and it lets you vary their interaction independently.
  *
- * In JS world: It is just a one approach to reduce coupling
+ * In JS world: It is just a one approach to reduce coupling.
  */
 
 const mediator = {

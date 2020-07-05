@@ -2,7 +2,7 @@
  * Separate the construction of a complex object from its representation so that
  * the same construction process can create different representations.
  *
- * In JS world: It is all about passing optional arguments
+ * In JS world: It is all about passing optional arguments.
  */
 
 function areRequiredIngredientsSet({ name, amount, water }) {

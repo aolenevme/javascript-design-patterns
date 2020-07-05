@@ -3,7 +3,7 @@
  * one object a chance to handle the request. Chain the receiving objects and
  * pass the request along the chain until an object handles it.
  *
- * In JS world: It is just an approach to function composition
+ * In JS world: It is just an approach to function composition.
  */
 
 function chain(message) {

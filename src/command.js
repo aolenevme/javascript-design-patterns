@@ -3,7 +3,7 @@
  * with different requests, queue or log requests, and support undoable
  * operations.
  *
- * In JS world: Command is just an object-oriented replacement for callback
+ * In JS world: Command is just an object-oriented replacement for callback.
  */
 
 function execute(command) {
