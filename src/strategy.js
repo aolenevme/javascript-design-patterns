@@ -3,7 +3,7 @@
  * interchangeable. Strategy lets the algorithm vary independently
  * from clients that use it.
  *
- * In JS world: Strategy is just a function passed to another function
+ * In JS world: Strategy is just a function passed to another function.
  */
 
 const collection = [4, 5, 2, 9, 100, 3];
