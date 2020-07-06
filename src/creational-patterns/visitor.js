@@ -7,7 +7,7 @@
  * pattern.
  */
 
-const { defMulti, defMethod } = require("./common/multiple-dispatch.js");
+const { defMulti, defMethod } = require("../utils/multiple-dispatch.js");
 
 function equals(...methodArguments) {
   const [first, second] = methodArguments;

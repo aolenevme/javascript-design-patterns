@@ -7,7 +7,7 @@
  * we can use mock parental implementations if new one doesn`t exist yet.
  */
 
-const { defMulti, defMethod } = require("./common/multiple-dispatch.js");
+const { defMulti, defMethod } = require("../utils/multiple-dispatch.js");
 
 const jobHierarchy = [
   "programmer-job",
