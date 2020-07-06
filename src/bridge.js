@@ -3,18 +3,41 @@
  * independently.
  *
  * In JS world: There is no bridge here, but abstraction and implementation can
- * live independently.
+ * live independently. So we can use composite and visitor to mimic it. Plus,
+ * we can use mock parental implementations if new one doesn`t exist yet.
  */
 
 const { defMulti, defMethod } = require("./common/multiple-dispatch.js");
 
 const jobHierarchy = [
-  "job",
+  "programmer-job",
   [
-    ["clojure-job", ["senior-clojure-job"]],
     ["java-job", ["senior-java-job"]],
+    ["clojure-job", ["senior-clojure-job"]],
   ],
 ];
+
+function findParentJobName(jobName, subtree) {
+  if (isJobNameExistInNode(jobName, subtree)) {
+    return subtree[0];
+  }
+
+  for (const node of subtree) {
+    if (isJobNameExistInNode(jobName, node)) {
+      return node[0];
+    }
+  }
+
+  for (const node of subtree) {
+    if (Array.isArray(node)) {
+      return findParentJobName(jobName, node);
+    }
+  }
+}
+
+function isJobNameExistInNode(jobName, node) {
+  return Array.isArray(node) && node.flat(1).includes(jobName);
+}
 
 function regularJob(...methodArguments) {
   const [jobName] = methodArguments;
@@ -22,47 +45,31 @@ function regularJob(...methodArguments) {
   return [jobName === jobHierarchy[0], methodArguments];
 }
 
+function clojureJob(...methodArguments) {
+  const [jobName] = methodArguments;
+
+  return [jobName === jobHierarchy[1][1][0], methodArguments];
+}
+
 function adHocJob(...methodArguments) {
   const [jobName] = methodArguments;
 
-  const [isParentJobNameFound, parentJobName] = findParentJobName(jobName);
+  const parentJobName = findParentJobName(jobName, jobHierarchy);
 
-  return [isParentJobNameFound, [parentJobName]];
+  return [Boolean(parentJobName), [parentJobName]];
 }
 
-function isJobExistInHierarchy(jobName) {
-  const flattenJobHierarchy = jobHierarchy.flat(3);
-
-  return flattenJobHierarchy.includes(jobName);
-}
-
-function findParentJobName(jobName, currentJobHierarchy = jobHierarchy) {
-  if (!isJobExistInHierarchy(jobName)) {
-    return [false, ""];
-  }
-
-  const flatten4currentLevelJobHierarchy = currentJobHierarchy.flat(1);
-
-  if (flatten4currentLevelJobHierarchy.includes(jobName)) {
-    return [true, flatten4currentLevelJobHierarchy[0]];
-  }
-
-  return findParentJobName(jobName, );
-}
-
-function filterPositionByJobName(jobName) {
+function filterRequirementsByJobName(jobName) {
   return defMulti(
-    defMethod(
-      regularJob(jobName),
-      () => `Check requirements for the ${jobName}`
-    ),
+    defMethod(regularJob(jobName), () => "Requirements for the programmer job"),
+    defMethod(clojureJob(jobName), () => "Requirements for the clojure job"),
     defMethod(adHocJob(jobName), (parentJobName) =>
-      filterPositionByJobName(parentJobName)
+      filterRequirementsByJobName(parentJobName)
     ),
-    defMethod([true, []], () => `Sorry, there is no such job: ${jobName} :(`)
+    defMethod([true, []], () => `Sorry, there is requirements ${jobName} :(`)
   )();
 }
 
-console.log(filterPositionByJobName("job"));
-console.log(filterPositionByJobName("senior-clojure-job"));
-console.log(filterPositionByJobName("non-existing-in-hierarchy-job"));
+console.log(filterRequirementsByJobName("programmer-job"));
+console.log(filterRequirementsByJobName("senior-clojure-job"));
+console.log(filterRequirementsByJobName("logistic-job"));
