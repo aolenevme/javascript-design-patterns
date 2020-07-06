@@ -8,7 +8,7 @@
 
 const { defMulti, defMethod } = require("./common/multiple-dispatch.js");
 
-const hierarchy = [
+const jobHierarchy = [
   "job",
   [
     ["clojure-job", ["senior-clojure-job"]],
@@ -19,27 +19,35 @@ const hierarchy = [
 function regularJob(...methodArguments) {
   const [jobName] = methodArguments;
 
-  return [jobName === hierarchy[0], methodArguments];
+  return [jobName === jobHierarchy[0], methodArguments];
 }
 
 function adHocJob(...methodArguments) {
   const [jobName] = methodArguments;
 
-  const [isJobExistInHierarchy, parentJobName] = findParentJobName(jobName);
+  const [isParentJobNameFound, parentJobName] = findParentJobName(jobName);
 
-  return [isJobExistInHierarchy, [parentJobName]];
+  return [isParentJobNameFound, [parentJobName]];
 }
 
-function findParentJobName(jobName) {
-  const flattedJobHierarchy = hierarchy.flat(3);
+function isJobExistInHierarchy(jobName) {
+  const flattenJobHierarchy = jobHierarchy.flat(3);
 
-  const isJobExistInHierarchy = flattedJobHierarchy.includes(jobName);
+  return flattenJobHierarchy.includes(jobName);
+}
 
-  if (!isJobExistInHierarchy) {
+function findParentJobName(jobName, currentJobHierarchy = jobHierarchy) {
+  if (!isJobExistInHierarchy(jobName)) {
     return [false, ""];
   }
 
-  return [true, "job"];
+  const flatten4currentLevelJobHierarchy = currentJobHierarchy.flat(1);
+
+  if (flatten4currentLevelJobHierarchy.includes(jobName)) {
+    return [true, flatten4currentLevelJobHierarchy[0]];
+  }
+
+  return findParentJobName(jobName, );
 }
 
 function filterPositionByJobName(jobName) {
@@ -57,4 +65,4 @@ function filterPositionByJobName(jobName) {
 
 console.log(filterPositionByJobName("job"));
 console.log(filterPositionByJobName("senior-clojure-job"));
-console.log(filterPositionByJobName("non-existing-job"));
+console.log(filterPositionByJobName("non-existing-in-hierarchy-job"));
