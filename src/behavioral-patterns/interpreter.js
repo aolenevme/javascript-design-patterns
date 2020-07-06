@@ -6,7 +6,7 @@
  * In JS world: It is a set of functions to process a tree.
  */
 
-const { defMulti, defMethod } = require("./common/multiple-dispatch.js");
+const { defMulti, defMethod } = require("../utils/multiple-dispatch.js");
 
 function isNumber(...methodArguments) {
   const [tree] = methodArguments;
