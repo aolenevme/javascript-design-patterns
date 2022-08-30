@@ -1,4 +1,4 @@
-# Javascript Design Patterns 🤓
+# Classic Design Patterns in Javascript 🤓
 
 > Classic [Design Patterns](https://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional-ebook/dp/B000SEIBB8)
 > in Javascript in my humble implementation with a reference to [the beautiful work](http://mishadoff.com/blog/clojure-design-patterns/).
