@@ -1,7 +1,9 @@
-# Classic Design Patterns in Javascript 🤓
+<div align="center">
 
-> Classic [Design Patterns](https://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional-ebook/dp/B000SEIBB8)
-> in Javascript in my humble implementation with a reference to [the beautiful work](http://mishadoff.com/blog/clojure-design-patterns/).
+![glasses emoji](https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/325/glasses_1f453.png)
 
-> NB. I know that we are able to use OOP syntax and approaches in Javascript, but we will lean towards the FP style just
-> because it is matter of my taste.
+# Classic Design Patterns in Javascript
+
+Classic [Design Patterns](https://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional-ebook/dp/B000SEIBB8) in my humble implementation with reference to [the beautiful work](http://mishadoff.com/blog/clojure-design-patterns/).
+
+</div>
